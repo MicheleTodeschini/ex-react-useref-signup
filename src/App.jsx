@@ -34,10 +34,10 @@ function App() {
             required />
         </div>
         <div className="mb-3 w-50">
-          <select className="form-select" aria-label="Default select example">
-            <option selected>Seleziona la specializzazione</option>
+          <select className="form-select" required>
+            <option value="" >Seleziona la specializzazione</option>
             <option value="1">Full Stack</option>
-            <option value="2">Backedn</option>
+            <option value="2">Backend</option>
             <option value="3">Frontend</option>
           </select>
         </div>
