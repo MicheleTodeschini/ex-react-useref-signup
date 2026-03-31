@@ -7,18 +7,31 @@ function App() {
   return (
     <>
       <h1>Benvenuto nella pagina di registrazione!</h1>
-      <form>
+      <form className='needs-validation'>
         <div className="mb-3 w-50">
-          <input type="text" className="form-control " aria-describedby="emailHelp" placeholder='Nome completo' />
+          <input type="text"
+            className="form-control "
+            placeholder='Nome completo'
+            required />
         </div>
         <div className="mb-3 w-50">
-          <input type="email" className="form-control " aria-describedby="emailHelp" placeholder='email@example.com' />
+          <input type="email"
+            className="form-control "
+            placeholder='email@example.com'
+            required />
         </div>
         <div className="mb-3 w-50">
-          <input type="password" className="form-control" placeholder='inserisci la password' />
+          <input type="password"
+            className="form-control"
+            placeholder='inserisci la password'
+            required />
         </div>
         <div className="mb-3 w-50">
-          <input type="number" className="form-control" placeholder='Anni di esperienza' />
+          <input type="number"
+            className="form-control"
+            placeholder='Anni di esperienza'
+            min="0"
+            required />
         </div>
         <div className="mb-3 w-50">
           <select className="form-select" aria-label="Default select example">
