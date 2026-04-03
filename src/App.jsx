@@ -50,6 +50,11 @@ function App() {
     return (password.length >= 8 && lettera, numero, simbolo)
   }, [password])
 
+  const checkDescription = useMemo(() => {
+    const valida = textArea.trim().length > 10 && textArea.trim().length < 100
+    return valida
+  }, [textArea])
+
 
   return (
     <>
@@ -102,6 +107,7 @@ function App() {
             value={anniEsperienza}
             onChange={e => setAnniEsperienza(e.target.value)}
             min="0"
+            max='100'
             required />
         </div>
         <div className="mb-3 w-50">
@@ -118,10 +124,13 @@ function App() {
           <label className="form-label fw-bold" >Parlaci di te</label>
           <textarea className="form-control" rows="3"
             value={textArea}
-            onChange={e => setTextArea(e.target.value)}></textarea>
+            onChange={e => setTextArea(e.target.value)}
+          ></textarea>
+          <p style={{ color: checkDescription ? 'green' : 'red' }}>
+            {checkDescription ? 'Va bene' : 'minimo 10 caratteri max 100'}</p>
         </div>
         <button type="submit" className="btn btn-primary"
-          onClick={stampaConsole}>Submit</button>
+          onSubmit={stampaConsole}>Submit</button>
       </form>
     </>
   )
