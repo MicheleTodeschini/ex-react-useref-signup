@@ -43,6 +43,13 @@ function App() {
     return valido && userName.length >= 6
   }, [userName])
 
+  const checkPassword = useMemo(() => {
+    const lettera = password.split('').some(char => letters.includes(char))
+    const numero = password.split('').some(char => numbers.includes(char))
+    const simbolo = password.split('').some(char => symbols.includes(char))
+    return (password.length >= 8 && lettera, numero, simbolo)
+  }, [password])
+
 
   return (
     <>
@@ -84,6 +91,9 @@ function App() {
             value={password}
             onChange={e => setPassword(e.target.value)}
             required />
+          <p style={{ color: checkPassword ? 'green' : 'red' }}>
+            {checkPassword ? 'Password valida' : 'La password deve avere almeno 8 caratteri e contenere minimo 1 lettera, 1 simbolo e 1 numero'}
+          </p>
         </div>
         <div className="mb-3 w-50">
           <input type="number"
