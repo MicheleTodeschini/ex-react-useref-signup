@@ -1,26 +1,32 @@
 
-import { useState } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import './App.css'
 
 function App() {
 
   const [fullName, setFullName] = useState('')
+  const [userName, setUserName] = useState('')
   const [mail, setMail] = useState('')
   const [password, setPassword] = useState('')
   const [anniEsperienza, setAnniEsperienza] = useState('')
   const [specializzazione, setSpecializzazione] = useState('')
   const [textArea, setTextArea] = useState('')
 
+  const letters = "abcdefghijklmnopqrstuvwxyz";
+  const numbers = "0123456789";
+  const symbols = `!@#$%^&*()-_=+[]{}|;:'\\",.<>?/\\\`~`;
+
   function stampaConsole(e) {
     e.preventDefault()
     console.log(`
-        Nome completo: ${fullName}
-        Mail: ${mail}
-        Password: ${password}
-        Anni di Esperienza: ${anniEsperienza}
-        specializzazione: ${specializzazione}
-        textArea: ${textArea}
-        `);
+    Nome completo: ${fullName}
+    UserName: ${userName}
+    Mail: ${mail}
+    Password: ${password}
+    Anni di Esperienza: ${anniEsperienza}
+    specializzazione: ${specializzazione}
+    textArea: ${textArea}
+    `);
     setFullName('')
     setMail('')
     setPassword('')
@@ -29,6 +35,13 @@ function App() {
     setTextArea('')
 
   }
+
+  const checkUsername = useMemo(() => {
+    const valido = userName.split('').every(char =>
+      letters.includes(char.toLocaleLowerCase()) || numbers.includes(char)
+    )
+    return valido && userName.length >= 6
+  }, [userName])
 
 
   return (
@@ -42,6 +55,19 @@ function App() {
             value={fullName}
             onChange={e => setFullName(e.target.value)}
             required />
+        </div>
+        <div className="mb-3 w-50">
+          <input type="text"
+            className="form-control "
+            placeholder='UserName'
+            value={userName}
+            onChange={e => setUserName(e.target.value)}
+            required />
+          <p style={{ color: checkUsername ? 'green' : 'red' }}>
+            {checkUsername
+              ? 'Username valido '
+              : 'Minimo 6 caratteri e niente caratteri speciali'}
+          </p>
         </div>
         <div className="mb-3 w-50">
           <input type="email"
