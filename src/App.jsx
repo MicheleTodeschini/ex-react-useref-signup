@@ -1,15 +1,20 @@
 
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useMemo, useRef } from 'react'
 import './App.css'
 
 function App() {
 
-  const [fullName, setFullName] = useState('')
+  const fullNameRef = useRef()
+  const fullName = fullNameRef.current.value
+  const emailRef = useRef()
+  const email = emailRef.current.value
+  const anniEsperienzaRef = useRef()
+  const anniesperienza = anniEsperienzaRef.current.value
+  const specializzazioneRef = useRef()
+  const specializzazione = specializzazioneRef.current.value
+
   const [userName, setUserName] = useState('')
-  const [mail, setMail] = useState('')
   const [password, setPassword] = useState('')
-  const [anniEsperienza, setAnniEsperienza] = useState('')
-  const [specializzazione, setSpecializzazione] = useState('')
   const [textArea, setTextArea] = useState('')
 
   const letters = "abcdefghijklmnopqrstuvwxyz";
@@ -21,19 +26,19 @@ function App() {
     console.log(`
     Nome completo: ${fullName}
     UserName: ${userName}
-    Mail: ${mail}
+    Mail: ${email}
     Password: ${password}
-    Anni di Esperienza: ${anniEsperienza}
+    Anni di Esperienza: ${anniesperienza}
     specializzazione: ${specializzazione}
     textArea: ${textArea}
     `);
-    setFullName('')
-    setMail('')
+    setUserName('')
     setPassword('')
-    setAnniEsperienza('')
-    setSpecializzazione('')
     setTextArea('')
-
+    fullNameRef.current.value = ''
+    emailRef.current.value = ''
+    anniEsperienzaRef.current.value = ''
+    specializzazioneRef.current.value = ''
   }
 
   const checkUsername = useMemo(() => {
@@ -47,7 +52,7 @@ function App() {
     const lettera = password.split('').some(char => letters.includes(char))
     const numero = password.split('').some(char => numbers.includes(char))
     const simbolo = password.split('').some(char => symbols.includes(char))
-    return (password.length >= 8 && lettera, numero, simbolo)
+    return password.length >= 8 && lettera && numero && simbolo
   }, [password])
 
   const checkDescription = useMemo(() => {
@@ -59,13 +64,12 @@ function App() {
   return (
     <>
       <h1>Benvenuto nella pagina di registrazione!</h1>
-      <form className='needs-validation'>
+      <form className='needs-validation' onSubmit={stampaConsole}>
         <div className="mb-3 w-50">
           <input type="text"
             className="form-control "
             placeholder='Nome completo'
-            value={fullName}
-            onChange={e => setFullName(e.target.value)}
+            ref={fullNameRef}
             required />
         </div>
         <div className="mb-3 w-50">
@@ -85,8 +89,7 @@ function App() {
           <input type="email"
             className="form-control "
             placeholder='email@example.com'
-            value={mail}
-            onChange={e => setMail(e.target.value)}
+            ref={emailRef}
             required />
         </div>
         <div className="mb-3 w-50">
@@ -104,16 +107,14 @@ function App() {
           <input type="number"
             className="form-control"
             placeholder='Anni di esperienza'
-            value={anniEsperienza}
-            onChange={e => setAnniEsperienza(e.target.value)}
+            ref={anniEsperienzaRef}
             min="0"
             max='100'
             required />
         </div>
         <div className="mb-3 w-50">
           <select className="form-select"
-            value={specializzazione}
-            onChange={e => setSpecializzazione(e.target.value)} required>
+            ref={specializzazioneRef} required>
             <option value="" >Seleziona la specializzazione</option>
             <option value="1">Full Stack</option>
             <option value="2">Backend</option>
@@ -130,7 +131,7 @@ function App() {
             {checkDescription ? 'Va bene' : 'minimo 10 caratteri max 100'}</p>
         </div>
         <button type="submit" className="btn btn-primary"
-          onSubmit={stampaConsole}>Submit</button>
+        >Submit</button>
       </form>
     </>
   )
