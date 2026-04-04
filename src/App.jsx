@@ -5,13 +5,13 @@ import './App.css'
 function App() {
 
   const fullNameRef = useRef()
-  const fullName = fullNameRef.current.value
+
   const emailRef = useRef()
-  const email = emailRef.current.value
+
   const anniEsperienzaRef = useRef()
-  const anniesperienza = anniEsperienzaRef.current.value
+
   const specializzazioneRef = useRef()
-  const specializzazione = specializzazioneRef.current.value
+
 
   const [userName, setUserName] = useState('')
   const [password, setPassword] = useState('')
@@ -23,6 +23,10 @@ function App() {
 
   function stampaConsole(e) {
     e.preventDefault()
+    const fullName = fullNameRef.current.value
+    const email = emailRef.current.value
+    const anniesperienza = anniEsperienzaRef.current.value
+    const specializzazione = specializzazioneRef.current.value
     console.log(`
     Nome completo: ${fullName}
     UserName: ${userName}
