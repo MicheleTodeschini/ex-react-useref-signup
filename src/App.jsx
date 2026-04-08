@@ -120,9 +120,9 @@ function App() {
           <select className="form-select"
             ref={specializzazioneRef} required>
             <option value="" >Seleziona la specializzazione</option>
-            <option value="1">Full Stack</option>
-            <option value="2">Backend</option>
-            <option value="3">Frontend</option>
+            <option value="Full Stack">Full Stack</option>
+            <option value="Backend">Backend</option>
+            <option value="Frontend">Frontend</option>
           </select>
         </div>
         <div className="mb-3 w-50">
